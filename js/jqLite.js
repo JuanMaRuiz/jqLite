@@ -75,7 +75,8 @@
 
   /**
    * Get all the elements by css selector (class or id). querySelector is widely supported from IE9. As querySelectorAll
-   * returns list of nodes instead of an array of elements we need to convert to Array (using es5 0> Array.prototype.slice.call(), using es6 Array.from)
+   * returns list of nodes instead of an array of elements we need to convert to Array (using es5 0> Array.prototype.slice.call(),
+   *  using es6 Array.from)
    * @param {String} selector CSS Selector (id or class)
    * @param {Element} context - If no context is provided 'document' will used
    * @return {Array} of DOM Elements
@@ -133,7 +134,14 @@
     element.className += ' ' + cls;
   };
 
+  // Returns the version of the library
+  jqLite.version = (function() {
+    return VERSION;
+  })();
+
   if (!scope.jqLite) {
     scope.jqLite = jqLite;
+  } else {
+    console.log('You are trying to load jqLite twice!!');
   }
 })(window);

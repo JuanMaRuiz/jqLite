@@ -2,27 +2,31 @@
 <head>
     <meta charset="utf-8">
     <title>Mocha Tests</title>
-    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <link href="/node_modules/mocha/mocha.css" rel="stylesheet" />
 </head>
 
 <body>
     <div id="mocha"></div>
 
     <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
-    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-    <script src="../node_modules/chai/chai.js"></script>
+    <script src="/node_modules/chai/chai.js"></script>
+    <script src="/node_modules/mocha/mocha.js"></script>
 
     <script src="../js/jqLite.js"></script>
     <script>
-        mocha.ui('tdd');
+        // mocha.ui('tdd');
+        mocha.ui('bdd');
         mocha.reporter('html');
         var expect = chai.expect;
         var assert = chai.assert;
+        // Due mocha has a global leak detection feature we need to ignore __browserSyn__ global variable
+        // in order to avoid fake fails on tests. More info: https://stackoverflow.com/questions/8360318/global-leak-errors-in-mocha#answer-10040921
+        mocha.setup({ globals: ['___browserSync___', 'jQuery'] });
     </script>
 
     <!-- All your tests here -->
-    <script src="/test/demoTest.js"></script>
+    <script src="/test/jqLiteGenericTest.js"></script>
+    <script src="/test/jqLiteDOMElementsTests.js"></script>
     <script>
         mocha.checkLeaks();
         mocha.globals(['jQuery', 'jqLite']);

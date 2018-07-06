@@ -1,0 +1,4 @@
+test/**/*.js
+test/**/*.json
+Gruntfile.js
+package.json

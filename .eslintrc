@@ -1,0 +1,50 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "google"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "globals": {
+    "jqLite": true,
+    "Developer": true,
+    "Developers": true,
+    "require": true
+  },
+  "rules": {
+    "no-var": 1, // Use var instead of let or const. 0 -> No warning, no error; 1 -> warning, 2 -> error.
+    "one-var": ["error", {
+        "var": "always"
+      }
+    ],
+    "semi": 2,
+    // enable additional rules
+    "indent": ["error", 2],
+    // disable rules from base configurations
+    "no-console": "off",
+    "max-len": ["error", 150],
+    // Code documentation
+    "require-jsdoc": [1, {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": false,
+        "ArrowFunctionExpression": false
+      }
+    }],
+    "valid-jsdoc": "error",
+        "prefer-const": [
+          "error",
+          {
+            "destructuring": "any",
+            "ignoreReadBeforeAssign": false
+          }
+        ]
+  }
+}
