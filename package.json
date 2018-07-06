@@ -1,0 +1,21 @@
+{
+  "name": "jqlite",
+  "version": "0.1.0",
+  "description": "Very basic library based on the idea of jQuery",
+  "main": "index.js",
+  "author": "JuanMa Ruiz",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "mochaTest": "node index.js",
+    "test": "nyc --reporter=html --reporter=text mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.24.5",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2"
+  }
+}
