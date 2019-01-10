@@ -1,27 +1,23 @@
 /**
  * jqLite v0.1.0
- * This jqLite provides a simple API like jQuery to manipulate the DOM and add some basics useful methods like ajax request.
+ * This jqLite provides a simple API like jQuery to manipulate the DOM and add some basics useful methods like ajax request or event listeners.
  * Is build in vanillaJS and the browser supports is the main objective.
- * @param {Object} window    - Window object is passed as parameter to avoid override it
- * @param {Object} document  - Document object is passed as parameter to avoid override it
+ * @param {Object} window - Window object is passed as parameter to avoid override it
  */
 (function(window) {
   'use strict';
 
-  const VERSION = '0.1.0',
-    scope = window,
-    jqLite = {};
+  const VERSION = '0.1.0';
+  const scope = window;
+  const jqLite = {};
 
   /**
-   * TODO. Separate in a different module
+   * TODO. Separate in a different module/namespace ???
    * This IIFE detects browser support for addEventListener method. If so, it adds to jqLite object as addListener property
    */
   (() => {
     if (window.addEventListener) {
       jqLite.addListener = (el, type, fn) => {
-        el.addEventListener(type, fn, false);
-      };
-      jqLite.removeEvListener = (el, type, fn) => {
         el.removeEventListener(type, fn, false);
       };
     }
@@ -29,18 +25,29 @@
 
   /**
    * TODO use init-time branching pattern
+   * Wrapper for addEventListener
+   * @param {Element} target
+   * @param {String} type - A string representing the Event Type
+   * @param {Function} callback - Function to execute when receives the notification
+   * @param {Object} opt - Object that specifies characteristics about the event listener
+   */
+  jqLite.on = (target, type, callback, opt = false) => {
+    target.addEventListener(type, callback, opt);
+  };
+
+  /**
    * Uses fetch API for requests. If fetch is not available on browser invoke the alternative method with uses XMLHttpRequest
    * @param {String} url - Url for the ajax request
    * @param {Function} callback - Callback function to execute when fetch response is received
    */
-  jqLite.ajax = function(url, callback) {
+  jqLite.ajax = function (url, callback) {
     if (fetch) {
       fetch(url)
         .then((response) => response.json())
         .catch((error) => {
           throw new Error(`Sorry, there was an error processing your request: ${error}`);
         })
-        .then( ( result ) => callback(result) );
+        .then((result) => callback(result));
     } else {
       makeRequest(url, callback);
     }
@@ -66,7 +73,7 @@
      */
     function doRequest() {
       try {
-        if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
           callback(JSON.parse(httpRequest.responseText));
         }
       } catch (err) {
@@ -81,7 +88,7 @@
    * @param {Element} context - If no context is provided 'document' will used
    * @return {Element} DOM Element to be retrieved
    */
-  jqLite.qs = function(selector, context = document) {
+  jqLite.qs = function (selector, context = document) {
     return context.querySelector(selector);
   };
 
@@ -93,7 +100,7 @@
    * @param {Element} context - If no context is provided 'document' will used
    * @return {Array} of DOM Elements
    */
-  jqLite.qsa = function(selector, context = document) {
+  jqLite.qsa = function (selector, context = document) {
     return Array.from(context.querySelectorAll(selector));
   };
 
@@ -104,10 +111,10 @@
    * all the attributes the element should have to be created
    * @return {Element} DOM Element to be created
    */
-  jqLite.createElement = function(element, config) {
+  jqLite.createElement = function (element, config) {
     const domElement = document.createElement(element);
-    if ( config ) {
-      for (const [key, value] of Object.entries(config) ) {
+    if (config) {
+      for (const [key, value] of Object.entries(config)) {
         domElement.setAttribute(key, value);
       }
     }
@@ -115,24 +122,12 @@
   };
 
   /**
-   * Wrapper for addEventListener
-   * @param {Element} target
-   * @param {String} type - A string representing the Event Type
-   * @param {Function} callback - Function to execute when receives the notification
-   * @param {Object} options - Object that specifies characteristics about the event listener
-   */
-  jqLite.$on = function(target, type, callback, options) {
-    const opt = options || false;
-    target.addEventListener(type, callback, opt);
-  };
-
-  /**
    * Remove the class off all elements passed as NodeList
    * @param {NodeList} listOfElements - List of element with the given class we want to remove
    * @param {String} classToRemove
    */
-  jqLite.removeClass = function(listOfElements, classToRemove) {
-    for ( const dev of listOfElements) {
+  jqLite.removeClass = (listOfElements, classToRemove) => {
+    for (const dev of listOfElements) {
       dev.classList.remove(classToRemove);
     }
   };
@@ -142,18 +137,16 @@
    * @param {NodeElement} element - Element to add class
    * @param {String} cls - Class we want to add to the element
    */
-  jqLite.addClass = function(element, cls) {
+  jqLite.addClass = (element, cls) => {
     element.className += ` ${cls}`;
   };
 
   // Returns the version of the library
-  jqLite.version = (function() {
-    return VERSION;
-  })();
+  jqLite.version = (() => VERSION)();
 
   if (!scope.jqLite) {
     scope.jqLite = jqLite;
   } else {
-    console.log('You are trying to load jqLite twice!!');
+    console.error('You are trying to load jqLite twice!!');
   }
 })(window);
