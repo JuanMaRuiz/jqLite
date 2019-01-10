@@ -12,11 +12,8 @@
     scope = window,
     jqLite = {};
 
-  jqLite.thanks = function() {
-    return `Bazinga! Thanks for using jqLite version ${VERSION} 🦄`;
-  };
-
   /**
+   * TODO use in-time-branching pattern
    * Uses fetch API for requests. If fetch is not available on browser invoke the alternative method with uses XMLHttpRequest
    * @param {String} url        - Url for the ajax request
    * @param {Function} callback - Callback function to execute when fetch response is received
@@ -131,7 +128,7 @@
    * @param {String} cls - Class we want to add to the element
    */
   jqLite.addClass = function(element, cls) {
-    element.className += ' ' + cls;
+    element.className += ` ${cls}`;
   };
 
   // Returns the version of the library
