@@ -13,7 +13,7 @@
     jqLite = {};
 
   /**
-   * TODO use in-time-branching pattern
+   * TODO use init-time branching pattern
    * Uses fetch API for requests. If fetch is not available on browser invoke the alternative method with uses XMLHttpRequest
    * @param {String} url        - Url for the ajax request
    * @param {Function} callback - Callback function to execute when fetch response is received
