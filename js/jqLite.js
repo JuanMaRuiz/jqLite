@@ -13,9 +13,24 @@
     jqLite = {};
 
   /**
+   * TODO. Separate in a different module
+   * This IIFE detects browser support for addEventListener method. If so, it adds to jqLite object as addListener property
+   */
+  (() => {
+    if (window.addEventListener) {
+      jqLite.addListener = (el, type, fn) => {
+        el.addEventListener(type, fn, false);
+      };
+      jqLite.removeEvListener = (el, type, fn) => {
+        el.removeEventListener(type, fn, false);
+      };
+    }
+  })();
+
+  /**
    * TODO use init-time branching pattern
    * Uses fetch API for requests. If fetch is not available on browser invoke the alternative method with uses XMLHttpRequest
-   * @param {String} url        - Url for the ajax request
+   * @param {String} url - Url for the ajax request
    * @param {Function} callback - Callback function to execute when fetch response is received
    */
   jqLite.ajax = function(url, callback) {
@@ -33,7 +48,7 @@
 
   /**
    * Creates a new XMLHttpRequest if browser is not compatible with fetch method
-   * @param {String} url        - Url for the XMLHttpRequest request
+   * @param {String} url - Url for the XMLHttpRequest request
    * @param {Function} callback - Callback function to execute when XMLHttpRequest response is received
    */
   function makeRequest(url, callback) {
