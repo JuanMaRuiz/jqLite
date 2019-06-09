@@ -12,11 +12,11 @@
     "test": "mocha-chrome test/TestRunner.html"
   },
   "devDependencies": {
-    "browser-sync": "^2.24.5",
+    "browser-sync": "^2.26.7",
     "chai": "^4.1.2",
-    "eslint": "^5.0.1",
-    "eslint-config-google": "^0.11.0",
-    "mocha": "^6.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.13.0",
+    "mocha": "^6.1.4",
     "mocha-chrome": "^2.0.0"
   }
 }
