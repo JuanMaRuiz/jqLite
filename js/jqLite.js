@@ -9,7 +9,7 @@
 
   const VERSION = '0.1.0';
   const scope = window;
-  const jqLite = {};
+  const jq = {};
 
   /**
    * TODO. Separate in a different module/namespace ???
@@ -17,21 +17,21 @@
    */
   (() => {
     if (window.addEventListener) {
-      jqLite.addListener = (el, type, fn) => {
+      jq.addListener = (el, type, fn) => {
         el.removeEventListener(type, fn, false);
       };
     }
   })();
 
   /**
-   * TODO use init-time branching pattern
+   * TODO: use init-time branching pattern
    * Wrapper for addEventListener
    * @param {Element} target
    * @param {String} type - A string representing the Event Type
    * @param {Function} callback - Function to execute when receives the notification
    * @param {Object} opt - Object that specifies characteristics about the event listener
    */
-  jqLite.on = (target, type, callback, opt = false) => {
+  jq.on = (target, type, callback, opt = false) => {
     target.addEventListener(type, callback, opt);
   };
 
@@ -40,7 +40,7 @@
    * @param {String} url - Url for the ajax request
    * @param {Function} callback - Callback function to execute when fetch response is received
    */
-  jqLite.ajax = function (url, callback) {
+  jq.ajax = (url, callback) => {
     if (fetch) {
       fetch(url)
         .then((response) => response.json())
@@ -88,7 +88,7 @@
    * @param {Element} context - If no context is provided 'document' will used
    * @return {Element} DOM Element to be retrieved
    */
-  jqLite.qs = function (selector, context = document) {
+  jq.qs = (selector, context = document) => {
     return context.querySelector(selector);
   };
 
@@ -100,7 +100,7 @@
    * @param {Element} context - If no context is provided 'document' will used
    * @return {Array} of DOM Elements
    */
-  jqLite.qsa = function (selector, context = document) {
+  jq.qsa = (selector, context = document) => {
     return Array.from(context.querySelectorAll(selector));
   };
 
@@ -111,7 +111,7 @@
    * all the attributes the element should have to be created
    * @return {Element} DOM Element to be created
    */
-  jqLite.createElement = function (element, config) {
+  jq.createElement = (element, config) => {
     const domElement = document.createElement(element);
     if (config) {
       for (const [key, value] of Object.entries(config)) {
@@ -126,7 +126,7 @@
    * @param {NodeList} listOfElements - List of element with the given class we want to remove
    * @param {String} classToRemove
    */
-  jqLite.removeClass = (listOfElements, classToRemove) => {
+  jq.removeClass = (listOfElements, classToRemove) => {
     for (const dev of listOfElements) {
       dev.classList.remove(classToRemove);
     }
@@ -137,15 +137,15 @@
    * @param {NodeElement} element - Element to add class
    * @param {String} cls - Class we want to add to the element
    */
-  jqLite.addClass = (element, cls) => {
+  jq.addClass = (element, cls) => {
     element.className += ` ${cls}`;
   };
 
   // Returns the version of the library
-  jqLite.version = (() => VERSION)();
+  jq.version = (() => VERSION)();
 
-  if (!scope.jqLite) {
-    scope.jqLite = jqLite;
+  if (!scope.jq) {
+    scope.jq = jq;
   } else {
     console.error('You are trying to load jqLite twice!!');
   }

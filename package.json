@@ -9,7 +9,8 @@
   "scripts": {
     "mochaTest": "node test/index.js",
     "lint": "eslint js/*.js --fix",
-    "test": "mocha-chrome test/index.html"
+    "test": "mocha-chrome test/index.html",
+    "coverage": "nyc npm test"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
@@ -17,9 +18,8 @@
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.13.0",
     "mocha": "^6.1.4",
-    "mocha-chrome": "^2.0.0"
-  },
-  "dependencies": {
+    "mocha-chrome": "^2.0.0",
     "nyc": "^14.1.1"
-  }
+  },
+  "dependencies": {}
 }

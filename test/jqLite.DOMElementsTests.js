@@ -1,6 +1,6 @@
 describe("DOM Element methods", function() {
-  it('jqLite.qsa method should return an array of elements', function () {
-    assert.typeOf(jqLite.qsa('aside'), "array", "we have an array");
+  it('jq.qsa method should return an array of elements', function () {
+    assert.typeOf(jq.qsa('aside'), "array", "we have an array");
   });
 
   before(function () {
@@ -9,8 +9,8 @@ describe("DOM Element methods", function() {
     $('body').append(TEST_ELEMENT);
   });
 
-  it('jqLite.qsa("aside") should return one element', function () {
-    assert.lengthOf(jqLite.qsa('aside'), 1, "only one element returned");
+  it('jq.qsa("aside") should return one element', function () {
+    assert.lengthOf(jq.qsa('aside'), 1, "only one element returned");
   });
 
   before(function () {
@@ -19,7 +19,7 @@ describe("DOM Element methods", function() {
     $('body').append(TEST_ELEMENT);
   });
 
-  it('jqLite.qsa should find 2 foo elements in the DOM', function () {
-    assert.lengthOf(jqLite.qsa('.foo'), 2, "The 2 div.foo elements were not found in the html");
+  it('jq.qsa should find 2 foo elements in the DOM', function () {
+    assert.lengthOf(jq.qsa('.foo'), 2, "The 2 div.foo elements were not found in the html");
   });
 });

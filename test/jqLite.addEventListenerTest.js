@@ -1,7 +1,7 @@
 describe('Events', () => {
-  describe('jqLite.addEventListener', () => {
+  describe('jq.addEventListener', () => {
     it('should be defined', () => {
-      assert.exists(jqLite.addListener, 'jqLite.addListener undefined or null');
+      assert.exists(jq.addListener, 'jq.addListener undefined or null');
     });
   });
 });
